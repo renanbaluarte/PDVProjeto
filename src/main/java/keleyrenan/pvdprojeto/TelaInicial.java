@@ -15,6 +15,7 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         initComponents();
+        Estoque Estoque = new Estoque();
     }
 
     /**
@@ -38,8 +39,18 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel1.setText("Mercado Popular ");
 
         NovaVendaBut.setText("Nova venda");
+        NovaVendaBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NovaVendaButActionPerformed(evt);
+            }
+        });
 
         NovoProdutoBut.setText("Cadastrar produto");
+        NovoProdutoBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NovoProdutoButActionPerformed(evt);
+            }
+        });
 
         ExtratoVendaBut.setText("Extrato de Vendas");
 
@@ -79,6 +90,17 @@ public class TelaInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void NovaVendaButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovaVendaButActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_NovaVendaButActionPerformed
+
+    private void NovoProdutoButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovoProdutoButActionPerformed
+        // TODO add your handling code here:
+         TelaCadastro cad = new TelaCadastro();
+        cad.setVisible(true);
+    }//GEN-LAST:event_NovoProdutoButActionPerformed
 
     /**
      * @param args the command line arguments

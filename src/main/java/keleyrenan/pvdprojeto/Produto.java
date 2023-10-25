@@ -10,14 +10,23 @@ package keleyrenan.pvdprojeto;
  */
 public class Produto {
     
-    private String codigo;
+    String produto(int codigo, String nome, float preco, int quantiEstoque, String dataUltVenda){
+    this.codigo = codigo;
+    this.nome = nome;
+    this.quantiEstoque = quantiEstoque;
+    this.dataUltVenda = dataUltVenda;
+        return null;
+    
+    }
+    
+    private int codigo;
     private String nome;
     private int unidade;
     private float preco;
     private int quantiEstoque;
     private String dataUltVenda;
     
-    public String obtCod(){return codigo;}
+    public int obtCod(){return codigo;}
     public String obtNome(){return nome;}
     public int obtUni(){return unidade;}
     public float obtPreco(){return preco;}
@@ -26,7 +35,7 @@ public class Produto {
     
     
     
-    public void altCod(String codigo){this.codigo = codigo;}
+    public void altCod(int codigo){this.codigo = codigo;}
     public void altNome(String nome){this.nome = nome;}
     public void altUni(int unidade){this.unidade = unidade;}
     public void altPreco(float preco){this.preco = preco;}

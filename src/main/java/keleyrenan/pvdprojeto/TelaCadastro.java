@@ -4,17 +4,30 @@
  */
 package keleyrenan.pvdprojeto;
 
+import java.util.*;
+import javax.swing.WindowConstants;
+
 /**
  *
  * @author rdias
  */
 public class TelaCadastro extends javax.swing.JFrame {
+      ArrayList<String> Estoque = new ArrayList<String>();
+    
+      Produto produto = new Produto();
+    
 
     /**
      * Creates new form TelaCadastro
      */
     public TelaCadastro() {
+        
+        
+        
         initComponents();
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        
+        
     }
 
     /**
@@ -26,21 +39,158 @@ public class TelaCadastro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        GerarBut = new javax.swing.JButton();
+        InsNome = new javax.swing.JTextField();
+        InsUni = new javax.swing.JTextField();
+        InsPreco = new javax.swing.JTextField();
+        CadastrarBut = new javax.swing.JButton();
+        CodProdutoGerado = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setText("Mercado Popular");
+
+        jLabel2.setText("Código Produto:");
+
+        jLabel3.setText("Nome:");
+
+        jLabel4.setText("Unidade:");
+
+        jLabel5.setText("Preço:");
+
+        GerarBut.setText("Gerar");
+        GerarBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GerarButActionPerformed(evt);
+            }
+        });
+
+        InsNome.setText("Biscoito ");
+        InsNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsNomeActionPerformed(evt);
+            }
+        });
+
+        InsUni.setText("20");
+        InsUni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsUniActionPerformed(evt);
+            }
+        });
+
+        InsPreco.setText("24");
+
+        CadastrarBut.setText("Cadastrar");
+        CadastrarBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarButActionPerformed(evt);
+            }
+        });
+
+        CodProdutoGerado.setText("...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(18, 18, 18)
+                            .addComponent(InsNome, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(InsPreco))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(InsUni))
+                        .addComponent(CadastrarBut)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(GerarBut)
+                            .addGap(18, 18, 18)
+                            .addComponent(CodProdutoGerado))))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(GerarBut)
+                    .addComponent(CodProdutoGerado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(InsNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(InsUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(InsPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(CadastrarBut)
+                .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void InsNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InsNomeActionPerformed
+
+    private void InsUniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsUniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InsUniActionPerformed
+
+    private void GerarButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerarButActionPerformed
+        // TODO add your handling code here:
+        Random gerar = new Random();
+        
+        produto.altCod(gerar.nextInt(999999));
+        
+        String test = Integer.toString(produto.obtCod());
+        
+        
+        
+        CodProdutoGerado.setText(test);
+    }//GEN-LAST:event_GerarButActionPerformed
+
+    private void CadastrarButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarButActionPerformed
+        // TODO add your handling code here:
+        produto.altNome(InsNome.getText());
+        produto.altPreco(Float.parseFloat(InsPreco.getText()));
+        produto.altQuantiEstoque(Integer.parseInt(InsUni.getText()));
+        
+        Estoque.add(produto.toString());
+        
+        System.out.println(Estoque);
+        
+        
+        
+        
+    }//GEN-LAST:event_CadastrarButActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +228,16 @@ public class TelaCadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CadastrarBut;
+    private javax.swing.JLabel CodProdutoGerado;
+    private javax.swing.JButton GerarBut;
+    private javax.swing.JTextField InsNome;
+    private javax.swing.JTextField InsPreco;
+    private javax.swing.JTextField InsUni;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }
