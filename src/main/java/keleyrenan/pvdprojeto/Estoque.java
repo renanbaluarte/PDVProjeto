@@ -11,9 +11,29 @@ import java.util.ArrayList;
  * @author rdias
  */
 public class Estoque {
+    private static Estoque instance = null;
+    private ArrayList<String> list;
 
-        ArrayList<String> Estoque = new ArrayList<String>();
-   
+    private Estoque() {
+        list = new ArrayList<String>();
+    }
 
-    
+    public static Estoque getInstance() {
+        if (instance == null) {
+            instance = new Estoque();
+        }
+        return instance;
+    }
+
+    public void add(String item) {
+        list.add(item);
+    }
+
+    public void remove(String item) {
+        list.remove(item);
+    }
+
+    public ArrayList<String> getList() {
+        return list;
+    }
 }

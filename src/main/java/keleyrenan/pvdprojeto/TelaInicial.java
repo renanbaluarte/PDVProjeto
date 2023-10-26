@@ -15,7 +15,7 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         initComponents();
-        Estoque Estoque = new Estoque();
+        
     }
 
     /**
@@ -93,6 +93,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void NovaVendaButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovaVendaButActionPerformed
         // TODO add your handling code here:
+        TelaVenda vend = new TelaVenda();
+        vend.setVisible(true);
+        
        
     }//GEN-LAST:event_NovaVendaButActionPerformed
 
