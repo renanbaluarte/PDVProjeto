@@ -16,6 +16,7 @@ public class TelaInicial extends javax.swing.JFrame {
     public TelaInicial() {
         initComponents();
         
+        
     }
 
     /**
@@ -53,8 +54,18 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         ExtratoVendaBut.setText("Extrato de Vendas");
+        ExtratoVendaBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExtratoVendaButActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Estoque");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,6 +115,19 @@ public class TelaInicial extends javax.swing.JFrame {
          TelaCadastro cad = new TelaCadastro();
         cad.setVisible(true);
     }//GEN-LAST:event_NovoProdutoButActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        TelaEstoque Est = new TelaEstoque();
+        Est.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ExtratoVendaButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExtratoVendaButActionPerformed
+        // TODO add your handling code here:
+        TelaVendas vend = new TelaVendas();
+        vend.setVisible(true);
+    }//GEN-LAST:event_ExtratoVendaButActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,6 +4,8 @@
  */
 package keleyrenan.pvdprojeto;
 
+import javax.swing.WindowConstants;
+
 /**
  *
  * @author rdias
@@ -15,6 +17,7 @@ public class TelaVendas extends javax.swing.JFrame {
      */
     public TelaVendas() {
         initComponents();
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

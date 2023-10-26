@@ -5,6 +5,7 @@
 package keleyrenan.pvdprojeto;
 
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 /**
@@ -186,7 +187,8 @@ public class TelaCadastro extends javax.swing.JFrame {
         Estoque.add(produto.toString());
         
         System.out.println(Estoque);
-        
+        JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+
         
         
         
