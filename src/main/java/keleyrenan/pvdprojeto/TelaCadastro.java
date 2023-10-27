@@ -4,6 +4,9 @@
  */
 package keleyrenan.pvdprojeto;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
@@ -13,8 +16,7 @@ import javax.swing.WindowConstants;
  * @author rdias
  */
 public class TelaCadastro extends javax.swing.JFrame {
-      ArrayList<String> Estoque = new ArrayList<String>();
-    
+          
       Produto produto = new Produto();
     
 
@@ -105,27 +107,31 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(InsNome, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(InsPreco))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(InsUni))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(CadastrarBut)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(GerarBut)
-                            .addGap(18, 18, 18)
-                            .addComponent(CodProdutoGerado))))
-                .addContainerGap(158, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(GerarBut)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(CodProdutoGerado))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(InsPreco))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(InsUni, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(43, 43, 43)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(InsNome, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +175,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
         Random gerar = new Random();
         
-        produto.altCod(gerar.nextInt(999999));
+        produto.altCod(gerar.nextInt(99));
         
         String test = Integer.toString(produto.obtCod());
         
@@ -184,9 +190,25 @@ public class TelaCadastro extends javax.swing.JFrame {
         produto.altPreco(Float.parseFloat(InsPreco.getText()));
         produto.altQuantiEstoque(Integer.parseInt(InsUni.getText()));
         
-        Estoque.add(produto.toString());
+        ArrayList<String> lista = new ArrayList<String>();
         
-        System.out.println(Estoque);
+        lista.add(Integer.toString(produto.obtCod()));
+        lista.add(produto.obtNome());
+        lista.add(Float.toString(produto.obtPreco()));
+        lista.add(Integer.toString(produto.obtQuantiEstoque()));
+        
+        try {
+            FileOutputStream fos = new FileOutputStream(produto.obtNome()+ ".produto");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(lista);
+            oos.close();
+            fos.close();
+                
+            
+        }catch (IOException ioe){
+        JOptionPane.showMessageDialog(null, "Erro ao cadastrar.");}
+        
+        
         JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
 
         

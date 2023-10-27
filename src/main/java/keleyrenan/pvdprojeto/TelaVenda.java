@@ -4,13 +4,26 @@
  */
 package keleyrenan.pvdprojeto;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 
 /**
  *
  * @author rdias
  */
 public class TelaVenda extends javax.swing.JFrame {
+    ArrayList<String> Result = new ArrayList<String>();
 
     /**
      * Creates new form TelaVenda
@@ -18,6 +31,7 @@ public class TelaVenda extends javax.swing.JFrame {
     public TelaVenda() {
         initComponents();
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        
     }
 
     /**
@@ -37,13 +51,25 @@ public class TelaVenda extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         InsQuantidade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        MetoPaga = new javax.swing.JComboBox<>();
         VendaBut = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        MostrarPreco = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        Subtotal = new javax.swing.JLabel();
+        SubtotalBut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Mercado Popular");
+
+        InsCod.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        InsCod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsCodActionPerformed(evt);
+            }
+        });
 
         LocalizarBut.setText("Localizar");
         LocalizarBut.addActionListener(new java.awt.event.ActionListener() {
@@ -67,46 +93,76 @@ public class TelaVenda extends javax.swing.JFrame {
 
         jLabel4.setText("Método de Pagamento:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cartão", "A Vista" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        MetoPaga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cartão", "A Vista" }));
+        MetoPaga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                MetoPagaActionPerformed(evt);
             }
         });
 
         VendaBut.setText("Vender");
+        VendaBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VendaButActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Preço por Unidade: ");
+
+        MostrarPreco.setText("....");
+
+        jLabel6.setText("Subtotal:");
+
+        Subtotal.setText("....");
+
+        SubtotalBut.setText("Subtotal");
+        SubtotalBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubtotalButActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(MetoPaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 270, Short.MAX_VALUE))
+                            .addComponent(InsCod))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LocalizarBut))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(MostrarPreco))
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(InsCod, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LocalizarBut))
+                                .addComponent(InsQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ProdutoNome))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(InsQuantidade))
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(VendaBut)))
-                .addContainerGap(185, Short.MAX_VALUE))
+                                .addComponent(ProdutoNome)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SubtotalBut)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Subtotal))
+                            .addComponent(VendaBut))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,23 +171,30 @@ public class TelaVenda extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(InsCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(InsCod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LocalizarBut))
-                .addGap(27, 27, 27)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(ProdutoNome))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(ProdutoNome)
+                    .addComponent(jLabel6)
+                    .addComponent(Subtotal)
+                    .addComponent(SubtotalBut))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(MostrarPreco))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(InsQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MetoPaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(VendaBut)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -139,15 +202,95 @@ public class TelaVenda extends javax.swing.JFrame {
 
     private void LocalizarButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocalizarButActionPerformed
         // TODO add your handling code here:
+        String local = InsCod.getText();
+        String lo = local + ".produto";
+        
+               
+               
+                
+               
+            
+                
+                
+                try {
+                FileInputStream fis = new FileInputStream(lo);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                Result = (ArrayList) ois.readObject();
+                
+                ois.close();
+                fis.close();
+                 
+              
+            
+                }catch (IOException ioe){
+                    JOptionPane.showMessageDialog(null, "Produto não encontrado!");
+                    
+                    
+                }catch(ClassNotFoundException c){
+                    JOptionPane.showMessageDialog(null, "Produto não encontrado!");
+                    
+                }
+                
+                System.out.print(Result);
+                ProdutoNome.setText(Result.get(1));
+                MostrarPreco.setText("R$"+Result.get(2));
+                
+                
     }//GEN-LAST:event_LocalizarButActionPerformed
 
     private void InsQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsQuantidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_InsQuantidadeActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void MetoPagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetoPagaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_MetoPagaActionPerformed
+
+    private void VendaButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendaButActionPerformed
+        // TODO add your handling code here:
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        try {
+            FileOutputStream fos = new FileOutputStream("vendas.venda", true);
+            
+            Float ganho = Float.parseFloat(Result.get(2)) * Integer.parseInt(InsQuantidade.getText());
+            String data = Result.get(1) + ", " + InsQuantidade.getText()+ " Unidade(s)" + ", " + "RS$"+ ganho + ", " + formatter.format(date) + ", " + MetoPaga.getSelectedItem() + System.lineSeparator();
+            fos.write(data.getBytes());
+            fos.close();
+            JOptionPane.showMessageDialog(null, "Venda Feita!");
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Arquivo não encontrado!");
+        }
+        
+        //System.out.print(Result.get(4));
+      /*  
+        Path caminho = Paths.get(Result.get(0)+".produto"); 
+        try {
+            String conteudo = new String(Files.readAllBytes(caminho));
+            //Int meno = 
+            conteudo = conteudo.replace(Result.get(4),Integer.toString(Integer.parseInt(Result.get(4)) - Integer.parseInt(InsQuantidade.getText())) ); 
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Errooo!");;
+        }
+        */
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_VendaButActionPerformed
+
+    private void InsCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsCodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InsCodActionPerformed
+
+    private void SubtotalButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubtotalButActionPerformed
+        // TODO add your handling code here:
+        Float ganho = Float.parseFloat(Result.get(2)) * Integer.parseInt(InsQuantidade.getText());
+        Subtotal.setText("R$"+Float.toString(ganho));
+        
+    }//GEN-LAST:event_SubtotalButActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,12 +331,17 @@ public class TelaVenda extends javax.swing.JFrame {
     private javax.swing.JTextField InsCod;
     private javax.swing.JTextField InsQuantidade;
     private javax.swing.JButton LocalizarBut;
+    private javax.swing.JComboBox<String> MetoPaga;
+    private javax.swing.JLabel MostrarPreco;
     private javax.swing.JLabel ProdutoNome;
+    private javax.swing.JLabel Subtotal;
+    private javax.swing.JButton SubtotalBut;
     private javax.swing.JButton VendaBut;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

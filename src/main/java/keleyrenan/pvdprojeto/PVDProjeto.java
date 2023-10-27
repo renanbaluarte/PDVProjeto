@@ -18,7 +18,7 @@ public class PVDProjeto {
         
         
         
-        System.out.println("Hello World!");
+        //System.out.println("Hello World!");
         TelaInicial Ini = new TelaInicial();
         Ini.setVisible(true);
         

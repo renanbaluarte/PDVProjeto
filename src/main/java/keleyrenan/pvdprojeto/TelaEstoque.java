@@ -4,6 +4,16 @@
  */
 package keleyrenan.pvdprojeto;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 /**
@@ -11,6 +21,8 @@ import javax.swing.WindowConstants;
  * @author rdias
  */
 public class TelaEstoque extends javax.swing.JFrame {
+            ArrayList<String> Result = new ArrayList<String>();
+
 
     /**
      * Creates new form TelaEstoque
@@ -29,40 +41,83 @@ public class TelaEstoque extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TabelaEstoque = new javax.swing.JTable();
+        RecarregarBut = new javax.swing.JButton();
+        Lugar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TabelaEstoque.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Codigo", "Nome", "Preço", "Estoque"
+        RecarregarBut.setText("Recarregar");
+        RecarregarBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecarregarButActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(TabelaEstoque);
+        });
+
+        Lugar.setText("Clique em Recarregar!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Lugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(RecarregarBut, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 271, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(Lugar, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RecarregarBut)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void RecarregarButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecarregarButActionPerformed
+        // TODO add your handling code here:
+        ArrayList<String> Produtos = new ArrayList<String>();
+        
+        String dirPath = "";
+        String extension = ".produto";
+
+        
+        //Carrega todos os arquivos com a extensão ".nome", e exibe todos que existem.
+        
+        try{
+        List<Path> files = Files.walk(Paths.get(dirPath))
+                .filter(p -> p.toString().endsWith(extension))
+                .collect(Collectors.toList());
+
+        for (Path file : files) {
+            String nomes;
+            nomes = file.toString();
+            
+            
+            String nomefinal = nomes.substring(0, nomes.length() - 8);
+            Produtos.add(nomefinal + System.lineSeparator());
+        }
+        String conteudo = "<html>" + String.join("<br>", Produtos)+  "</html>";
+             
+             Lugar.setText(conteudo);
+        
+
+        }catch(java.io.IOException e){
+            //System.out.println("Erro ao localiazr alunos, talvez esteja vazio.");
+                
+                }
+        
+        
+        
+    
+    }//GEN-LAST:event_RecarregarButActionPerformed
 
     /**
      * @param args the command line arguments
@@ -100,7 +155,7 @@ public class TelaEstoque extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TabelaEstoque;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel Lugar;
+    private javax.swing.JButton RecarregarBut;
     // End of variables declaration//GEN-END:variables
 }
