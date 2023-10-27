@@ -1,4 +1,4 @@
-# Cadastro Aluno
+# PDV - Cadastro e venda de produtos
 
 ##### Projeto realizado para estudo de Java e POO.
 
